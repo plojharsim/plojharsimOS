@@ -9,7 +9,7 @@
 <body class="bg-[#fff8f2]">
     <header class="flex justify-between items-center p-4">
         <dev class="text-xl">plojharsimOS</dev>
-        <dev class="text-lg">19:42</dev>
+        <dev id="clock" class="text-lg">--:--</dev>
         <dev class="text-xl space-x-2">
             <button>🔔</button>
             <button>👤</button>
@@ -18,22 +18,13 @@
     </header>
     <main>
         <div class="flex gap-8 mt-3 px-6 items-start">
-            <div class="flex-1 p-2 rounded h-60 border-4 border-black flex flex-col">
-                <!-- Nadpis -->
+            <div id="weatherWidget" class="flex-1 p-2 rounded h-60 border-4 border-black flex flex-col">
                 <div class="text-center font-bold underline">Počasí</div>
-
-                <!-- Střední část: teplota vlevo, ikona vpravo -->
-                <div class="flex justify-between flex-1 px-4">
-                    <div class="text-[8rem] font-normal leading-none mt-4">18°C</div>
-                    <div class="text-[7rem]">🌤️</div>
+                <div class="flex justify-between flex-1 px-4 items-center">
+                    <div id="temp" class="text-[8rem] font-normal leading-none">--°C</div>
+                    <div id="icon" class="text-[7rem]">☁️</div>
                 </div>
-
-                <!-- Dolní část: popis počasí -->
-                <div class="text-center text-sm">Polojasno, mírný vítr</div>
             </div>
-
-
-
             <div class="flex-[0.5] p-2 rounded h-60 border-4 border-black">
                 <u><b>Program</b></u>
                 <br>
@@ -47,24 +38,239 @@
             </div>
         </div>
         <div class="grid grid-cols-5 gap-8 mt-10 px-12">
-            <button class="p-11 rounded border-4 border-black">Komunikace</button>
+            <button class="p-11 rounded border-4 border-black" data-popup-target="popupCommunication">Komunikace</button>
             <button class="rounded border-4 border-black">Sociální síť</button>
-            <button class="rounded border-4 border-black">Kalendář</button>
-            <button class="rounded border-4 border-black">Média</button>
-            <button class="rounded border-4 border-black">Poznámky</button>
+            <button class="rounded border-4 border-black" data-popup-target="popupWorks">Díla</button>
+            <button class="rounded border-4 border-black" data-popup-target="popupProductivity">Produktivita</button>
+            <button class="rounded border-4 border-black">Počasí</button>
         </div>
         <div class="grid grid-cols-4 gap-8 mt-10 px-40">
-            <button class="p-11 rounded border-4 border-black">Upomínky</button>
-            <button class="rounded border-4 border-black">Btn 7</button>
-            <button class="rounded border-4 border-black">Btn 8</button>
-            <button class="rounded border-4 border-black">Ostatní</button>
+            <button class="p-11 rounded border-4 border-black" data-popup-target="popupTools">Nástroje</button>
+            <button class="rounded border-4 border-black">Již brzy</button>
+            <button class="rounded border-4 border-black" data-popup-target="popupAppsForSpecificUse">Aplikace pro specifické uživatele</button>
+            <button class="rounded border-4 border-black" data-popup-target="popupOtherApps">Ostatní aplikace</button>
+        </div>
+
+        <!--------------------------------------------
+
+            PUPUP ZPRÁVY
+
+        ---------------------------------------------->
+
+        <!-- Komunikace -->
+
+        <div id="popupCommunication"
+                class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl w-2/3 h-2/3 p-6 shadow-xl relative flex flex-col justify-between">
+                <br>
+                <h2 class="text-3xl font-semibold text-center">Vyber způsob komunikace</h2>
+                <div class="flex justify-center gap-8 flex-1 items-center">
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black">
+                        Volání
+                    </button>
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black" >
+                        Zprávy
+                    </button>
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black" >
+                        Videohovory
+                    </button>
+                </div>
+                <button data-popup-close class="absolute top-3 right-6 text-black text-3xl font-bold">×</button>
+            </div>
+        </div>
+
+        <!-- Díla -->
+
+        <div id="popupWorks"
+                class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl w-2/3 h-2/3 p-6 shadow-xl relative flex flex-col justify-between">
+                <br>
+                <h2 class="text-3xl font-semibold text-center">Vyber typ díla pro konzumaci</h2>
+                <div class="flex justify-center gap-8 flex-1 items-center">
+                    <button class="w-1/5 h-36 text-lg rounded border-4 border-black">
+                        Hudba
+                    </button>
+                    <button class="w-1/5 h-36 text-lg rounded border-4 border-black" >
+                        Videa
+                    </button>
+                    <button class="w-1/5 h-36 text-lg rounded border-4 border-black" >
+                        Filmy
+                    </button>
+                    <button class="w-1/5 h-36 text-lg rounded border-4 border-black" >
+                        Seriály
+                    </button>
+                </div>
+                <button data-popup-close class="absolute top-3 right-6 text-black text-3xl font-bold">×</button>
+            </div>
+        </div>
+
+        <!-- Produktivita -->
+
+        <div id="popupProductivity"
+                class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl w-2/3 h-2/3 p-6 shadow-xl relative flex flex-col justify-between">
+                <br>
+                <h2 class="text-3xl font-semibold text-center">Vyberte aplikaci k otevření</h2>
+                <div class="flex justify-center gap-8 flex-1 items-center">
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black">
+                        Události
+                    </button>
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black" >
+                        To-do a seznamy
+                    </button>
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black" >
+                        Zápisník
+                    </button>
+                </div>
+                <button data-popup-close class="absolute top-3 right-6 text-black text-3xl font-bold">×</button>
+            </div>
+        </div>
+
+        <!-- Nástroje -->
+
+        <div id="popupTools"
+                class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl w-2/3 h-2/3 p-6 shadow-xl relative flex flex-col justify-between">
+                <br>
+                <h2 class="text-3xl font-semibold text-center">Vyberte aplikaci k otevření</h2>
+                <div class="flex justify-center gap-8 flex-1 items-center">
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black">
+                        Kalkulačka
+                    </button>
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black" >
+                        Náhodný generátor
+                    </button>
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black" >
+                        Záznamník
+                    </button>
+                </div>
+                <button data-popup-close class="absolute top-3 right-6 text-black text-3xl font-bold">×</button>
+            </div>
+        </div>
+
+        <!-- Aplikace pro specifické uživatele -->
+
+        <div id="popupAppsForSpecificUse"
+                class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl w-2/3 h-2/3 p-6 shadow-xl relative flex flex-col justify-between">
+                <br>
+                <h2 class="text-3xl font-semibold text-center">Vyberte specifickou aplikaci k otevření</h2>
+                <div class="flex justify-center gap-8 flex-1 items-center">
+                    <button class="w-1/2 h-40 text-lg rounded border-4 border-black">
+                        Školní systém
+                    </button>
+                </div>
+                <button data-popup-close class="absolute top-3 right-6 text-black text-3xl font-bold">×</button>
+            </div>
+        </div>
+
+        <!-- Ostatní aplikace -->
+
+        <div id="popupOtherApps"
+                class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-2xl w-2/3 h-2/3 p-6 shadow-xl relative flex flex-col justify-between">
+                <br>
+                <h2 class="text-3xl font-semibold text-center">Vyber aplikaci k otevření</h2>
+                <div class="flex justify-center gap-8 flex-1 items-center">
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black">
+                        Již brzy
+                    </button>
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black" >
+                        Již brzy
+                    </button>
+                    <button class="w-1/4 h-40 text-lg rounded border-4 border-black" >
+                        Již brzy
+                    </button>
+                </div>
+                <button data-popup-close class="absolute top-3 right-6 text-black text-3xl font-bold">×</button>
+            </div>
         </div>
     </main>
 </body>
+<script>
+  document.querySelectorAll('[data-popup-target]').forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-popup-target');
+      const popup = document.getElementById(targetId);
+      if (popup) popup.classList.remove('hidden');
+    });
+  });
+  document.querySelectorAll('[data-popup-close]').forEach(closeBtn => {
+    closeBtn.addEventListener('click', () => {
+      closeBtn.closest('.fixed')?.classList.add('hidden');
+    });
+  });
+  document.querySelectorAll('.fixed').forEach(popup => {
+    popup.addEventListener('click', e => {
+      if (e.target === popup) popup.classList.add('hidden');
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === "Escape") {
+      document.querySelectorAll('.fixed').forEach(popup => popup.classList.add('hidden'));
+    }
+  });
+
+  const API_KEY = "08f3a232b38d17668b72009243c2d789"; // vlož svůj API klíč z OpenWeatherMap
+  const CITY = "Pribram";
+  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric&lang=cz`;
+
+  async function loadWeather() {
+    try {
+      const res = await fetch(URL);
+      const data = await res.json();
+
+      const temp = Math.round(data.main.temp);
+      const desc = data.weather[0].description;
+      const iconCode = data.weather[0].icon;
+
+      // převod ikony z OpenWeatherMap na emoji (volitelně)
+      const iconMap = {
+        "01d": "☀️", "01n": "🌕",
+        "02d": "🌤️", "02n": "🌥️",
+        "03d": "☁️", "03n": "☁️",
+        "04d": "☁️", "04n": "☁️",
+        "09d": "🌧️", "09n": "🌧️",
+        "10d": "🌦️", "10n": "🌧️",
+        "11d": "⛈️", "11n": "🌩️",
+        "13d": "❄️", "13n": "🌨️",
+        "50d": "🌫️", "50n": "🌫️"
+      };
+
+      document.getElementById("temp").textContent = `${temp}°C`;
+      document.getElementById("desc").textContent = desc.charAt(0).toUpperCase() + desc.slice(1);
+      document.getElementById("icon").textContent = iconMap[iconCode] || "🌤️";
+    } catch (error) {
+      document.getElementById("desc").textContent = "Nepodařilo se načíst počasí 😕";
+    }
+  }
+
+  loadWeather();
+
+    function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+
+    // přidá nulu, pokud je číslo menší než 10
+    if (hours < 10) hours = "0" + hours;
+    if (minutes < 10) minutes = "0" + minutes;
+
+    document.getElementById("clock").textContent = `${hours}:${minutes}`;
+  }
+
+  // aktualizuj hned po načtení
+  updateClock();
+
+  // pak každou sekundu
+  setInterval(updateClock, 1000);
+</script>
+
 </html>
 
 <!--------------------------------------------
 
 Pro custom border: style="border-width:3px;"
+Pro link na button: onclick="window.location.href='https:google.com'"
 
 ---------------------------------------------->
