@@ -8,13 +8,13 @@
 </head>
 <body class="bg-[#fff8f2]">
     <header class="flex justify-between items-center p-4">
-        <dev class="text-xl">plojharsimOS</dev>
-        <dev id="clock" class="text-lg">--:--</dev>
-        <dev class="text-xl space-x-2">
+        <div class="text-xl">plojharsimOS</div>
+        <div id="clock" class="text-lg">--:--</div>
+        <div class="text-xl space-x-2">
             <button>🔔</button>
             <button>👤</button>
             <button>⚙️</button>
-        </dev>
+        </div>
     </header>
     <main>
         <div class="flex gap-8 mt-3 px-6 items-start">
@@ -211,7 +211,7 @@
     }
   });
 
-  const API_KEY = ""; // vlož svůj API klíč z OpenWeatherMap
+  const API_KEY = "08f3a232b38d17668b72009243c2d789"; // vlož svůj API klíč z OpenWeatherMap
   const CITY = "Pribram";
   const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric&lang=cz`;
 
